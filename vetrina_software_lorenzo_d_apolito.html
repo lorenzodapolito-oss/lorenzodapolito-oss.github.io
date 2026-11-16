@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorenzo D'Apolito — Suite Software Open-Source & Rust Apps</title>
+    <!-- Caricamento Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98) translateY(6px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-modal {
+            animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.35);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(148, 163, 184, 0.55);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white">
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="sticky top-0 z-30 backdrop-blur-md bg-white/85 dark:bg-slate-900/85 border-b border-slate-200/80 dark:border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                
+                <!-- Brand & Profilo Autore -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-orange-500 via-amber-600 to-rose-600 flex items-center justify-center text-white shadow-lg shadow-orange-500/20 shrink-0">
+                            <!-- Icona Ingranaggio/Codice Rust-style -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <h1 class="text-lg sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                                    Lorenzo D'Apolito
+                                </h1>
+                                <a href="https://github.com/lorenzodapolito-oss" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 border border-slate-200 dark:border-slate-700 transition">
+                                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                                    <span>@lorenzodapolito-oss</span>
+                                </a>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                Software & Open-Source Apps • Suite desktop ad alte prestazioni scritta principalmente in Rust
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Azioni Mobile -->
+                    <div class="flex items-center gap-2 lg:hidden">
+                        <button id="guide-btn-mobile" type="button" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition" title="Guida screenshot e pubblicazione">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </button>
+                        <button id="theme-toggle-mobile" type="button" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition" title="Cambia tema">
+                            <span class="theme-icon"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Controlli Desktop -->
+                <div class="flex items-center gap-3">
+                    <div class="relative flex-1 lg:w-80">
+                        <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            placeholder="Cerca app, licenza (Apache, MIT) o funzione..." 
+                            class="w-full pl-10 pr-4 py-2 text-sm rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-transparent focus:border-orange-500 focus:bg-white dark:focus:bg-slate-900 focus:outline-none transition"
+                        >
+                    </div>
+
+                    <button id="guide-btn-desktop" type="button" class="hidden lg:inline-flex items-center gap-2 px-3.5 py-2 text-sm font-medium rounded-xl bg-orange-50 dark:bg-orange-950/50 text-orange-700 dark:text-orange-300 border border-orange-200/70 dark:border-orange-800/50 hover:bg-orange-100 dark:hover:bg-orange-900/50 transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <span>Guida Screenshot & Deploy</span>
+                    </button>
+
+                    <button id="theme-toggle-desktop" type="button" class="hidden lg:inline-flex items-center justify-center p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition" title="Cambia tema chiaro/scuro">
+                        <span class="theme-icon"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Barra Filtri Categorie & Contatore -->
+            <div class="mt-4 flex items-center justify-between gap-4 overflow-x-auto pb-1">
+                <div id="category-filters" class="flex items-center gap-2"></div>
+                <span id="apps-counter" class="text-xs font-semibold text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                    19 applicazioni open-source
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== GRIGLIA PRINCIPALE DELLE 19 APP ==================== -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <div id="apps-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Renderizzato dinamicamente da APPS_DATA -->
+        </div>
+
+        <!-- Stato Nessun Risultato -->
+        <div id="empty-state" class="hidden text-center py-16 px-4">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+            </div>
+            <h3 class="text-lg font-bold">Nessuna applicazione trovata</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Prova a cercare un altro nome, categoria o licenza.</p>
+            <button id="reset-filters-btn" class="mt-4 px-4 py-2 text-sm font-semibold rounded-xl bg-orange-600 text-white hover:bg-orange-700 transition">
+                Mostra tutte le 19 app
+            </button>
+        </div>
+
+        <!-- ==================== GUIDA PIEGHEVOLE SCREENSHOT & GITHUB PAGES ==================== -->
+        <section id="publish-guide-section" class="mt-16 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+            <button id="accordion-toggle" type="button" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                <div class="flex items-center gap-3.5">
+                    <span class="w-9 h-9 rounded-xl bg-orange-100 dark:bg-orange-950 text-orange-600 dark:text-orange-400 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <h2 class="text-base sm:text-lg font-bold">Come caricare gli screenshot e pubblicare online su GitHub Pages</h2>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Istruzioni rapide per sostituire i mockup vettoriali con le immagini reali delle tue 19 app</p>
+                    </div>
+                </div>
+                <svg id="accordion-arrow" class="w-5 h-5 text-slate-400 transition-transform duration-200 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+
+            <div id="accordion-content" class="hidden px-6 pb-6 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60">
+                        <div class="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400 mb-1">1. Cartella /screenshots</div>
+                        <h3 class="font-bold text-base mb-2">Aggiungi le immagini reali</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Crea una cartella chiamata <code class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs font-mono">screenshots/</code> accanto a <code class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs font-mono">index.html</code> e salva gli screenshot (es. <code class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs font-mono">docplane.png</code>). Poi inserisci il percorso nel campo <code class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs font-mono">screenshot</code> dell'app.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60">
+                        <div class="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400 mb-1">2. GitHub Releases</div>
+                        <h3 class="font-bold text-base mb-2">Link di download già pronti</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Tutti i pulsanti <strong>Scarica</strong> puntano già alla pagina <code class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs font-mono">/releases</code> di ciascuno dei tuoi 19 repository su <code class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs font-mono">github.com/lorenzodapolito-oss</code>. Ti basta caricare gli eseguibili compilati in Rust nelle Releases.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60">
+                        <div class="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400 mb-1">3. Attiva GitHub Pages</div>
+                        <h3 class="font-bold text-base mb-2">Metti il sito online gratis</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Crea un repository chiamato <code class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs font-mono">lorenzodapolito-oss.github.io</code>, carica <code class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs font-mono">index.html</code> e la cartella <code class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs font-mono">screenshots/</code>, quindi attiva <strong>Pages</strong> da <em>Settings → Pages</em>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+            <p>© <span id="current-year"></span> <strong>Lorenzo D'Apolito</strong> (<a href="https://github.com/lorenzodapolito-oss" target="_blank" rel="noopener noreferrer" class="underline hover:text-orange-500">lorenzodapolito-oss</a>) — Software & Open-Source Apps.</p>
+            <p>19 Applicazioni Open-Source • Sviluppate in Rust</p>
+        </div>
+    </footer>
+
+    <!-- ==================== MODALE DETTAGLI, ANTEPRIMA & COMMENTI ==================== -->
+    <div id="app-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div id="modal-backdrop" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="flex min-h-full items-center justify-center p-4 sm:p-6">
+            <div class="relative w-full max-w-4xl rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-modal">
+                
+                <!-- Pulsante Chiudi -->
+                <button id="close-modal-btn" type="button" class="absolute top-4 right-4 z-10 p-2 rounded-full bg-slate-950/65 text-white hover:bg-slate-950 transition backdrop-blur-md" title="Chiudi finestra">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+
+                <!-- Area Anteprima Ingrandita -->
+                <div id="modal-preview-container" class="w-full h-64 sm:h-80 md:h-96 bg-slate-100 dark:bg-slate-950 relative overflow-hidden flex items-center justify-center"></div>
+
+                <!-- Corpo Modale -->
+                <div class="p-6 sm:p-8">
+                    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
+                        <div>
+                            <div id="modal-badges" class="flex flex-wrap items-center gap-2 mb-2.5"></div>
+                            <h2 id="modal-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight"></h2>
+                        </div>
+
+                        <!-- Pulsanti Principali: Codice Sorgente + Releases Download -->
+                        <div class="flex flex-wrap items-center gap-3 shrink-0">
+                            <a id="modal-repo-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                                </svg>
+                                <span>Sorgente GitHub</span>
+                            </a>
+
+                            <a id="modal-download-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-orange-600 hover:bg-orange-700 text-white shadow-lg shadow-orange-500/25 transition">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                                <span>Scarica (Releases)</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Descrizione e Nota dell'Autore -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 py-6 border-b border-slate-200 dark:border-slate-800">
+                        <div class="lg:col-span-2 space-y-2.5">
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Panoramica dell'Applicazione</h3>
+                            <p id="modal-description" class="text-slate-700 dark:text-slate-300 leading-relaxed text-sm sm:text-base"></p>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-orange-50/80 dark:bg-orange-950/30 border border-orange-200/80 dark:border-orange-800/50">
+                            <div class="flex items-center gap-2 text-orange-800 dark:text-orange-300 font-bold text-sm mb-2">
+                                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                                </svg>
+                                <span>Note dello Sviluppatore</span>
+                            </div>
+                            <p id="modal-author-note" class="text-xs sm:text-sm text-orange-950/90 dark:text-orange-200/90 leading-relaxed italic"></p>
+                        </div>
+                    </div>
+
+                    <!-- Sezione Commenti & Valutazioni -->
+                    <div class="pt-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-base font-bold flex items-center gap-2">
+                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+                                </svg>
+                                <span>Feedback & Commenti (<span id="comments-count">0</span>)</span>
+                            </h3>
+                            <span class="text-xs text-slate-400">Archiviazione locale nel browser</span>
+                        </div>
+
+                        <form id="comment-form" class="mb-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 space-y-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <input 
+                                    type="text" 
+                                    id="comment-author" 
+                                    required 
+                                    placeholder="Il tuo nome o username GitHub" 
+                                    class="px-3.5 py-2 text-sm rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-orange-500 focus:outline-none"
+                                >
+                                <select id="comment-rating" class="px-3.5 py-2 text-sm rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-orange-500 focus:outline-none">
+                                    <option value="5">★★★★★ (5/5 - Eccellente)</option>
+                                    <option value="4">★★★★☆ (4/5 - Ottima)</option>
+                                    <option value="3">★★★☆☆ (3/5 - Buona)</option>
+                                    <option value="2">★★☆☆☆ (2/5 - Da migliorare)</option>
+                                    <option value="1">★☆☆☆☆ (1/5 - Segnalazione bug)</option>
+                                </select>
+                            </div>
+                            <textarea 
+                                id="comment-text" 
+                                rows="2" 
+                                required 
+                                placeholder="Condividi un feedback, una richiesta di funzionalità o la tua esperienza d'uso..." 
+                                class="w-full px-3.5 py-2 text-sm rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-orange-500 focus:outline-none"
+                            ></textarea>
+                            <div class="flex items-center justify-between">
+                                <p id="comment-feedback-msg" class="text-xs text-emerald-600 dark:text-emerald-400 font-medium hidden">
+                                    Commento salvato con successo!
+                                </p>
+                                <button type="submit" class="ml-auto px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg bg-slate-900 dark:bg-orange-600 text-white hover:bg-slate-800 dark:hover:bg-orange-700 transition">
+                                    Invia Commento
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="comments-list" class="space-y-3 max-h-60 overflow-y-auto pr-1"></div>
+
+                        <!--
+                        ===========================================================================
+                        INTEGRAZIONE GISCUS (COMMENTI PUBBLICI CONDIVISI SU GITHUB):
+                        Per abilitare commenti pubblici sincronizzati con GitHub Discussions su
+                        lorenzodapolito-oss:
+                        1. Attiva "Discussions" sul tuo repository GitHub dedicato al sito.
+                        2. Genera lo snippet su https://giscus.app/it e sostituisci il form sopra
+                           con <div class="giscus"></div> caricando lo script Giscus con mapping="specific"
+                           e term=app.title.
+                        ===========================================================================
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SCRIPT DATI E LOGICA APPLICATIVA ==================== -->
+    <script>
+        /**
+         * ============================================================================
+         * CATALOGO DELLE 19 APPLICAZIONI — LORENZO D'APOLITO (lorenzodapolito-oss)
+         * ============================================================================
+         * Per aggiungere uno screenshot reale a un'app, salva l'immagine nella cartella
+         * "screenshots/" (es. "screenshots/docplane.png") e inserisci il percorso nel
+         * campo `screenshot`. Se vuoto, verrà generata un'anteprima SVG su misura.
+         */
+        const GITHUB_USER = "lorenzodapolito-oss";
+
+        const APPS_DATA = [
+            // -------------------- 1. OFFICE & PRODUTTIVITÀ --------------------
+            {
+                id: 1,
+                repo: "DocPlane",
+                title: "DocPlane",
+                category: "Office & Produttività",
+                language: "Rust",
+                license: "Open Source",
+                shortDesc: "Suite completa per ufficio open-source progettata per la produttività quotidiana, veloce, nativa e leggera.",
+                fullDesc: "DocPlane unisce in un'unica piattaforma coerente gli strumenti essenziali per il lavoro d'ufficio: elaborazione documenti, fogli di calcolo e presentazioni, offrendo un'alternativa nativa, reattiva e priva di telemetria.",
+                authorNote: "Pensata come punto di riferimento unificato per la produttività desktop moderna.",
+                screenshot: "", // es: "screenshots/docplane.png"
+                accent: "from-blue-600 via-indigo-600 to-sky-500",
+                uiType: "office"
+            },
+            {
+                id: 2,
+                repo: "WordBook.it",
+                title: "WordBook.it",
+                category: "Office & Produttività",
+                language: "Rust",
+                license: "Apache 2.0",
+                shortDesc: "Elaboratore di testi clean-room compatibile con Microsoft Word, scritto interamente in pure Rust.",
+                fullDesc: "WordBook.it è una reimplementazione open-source clean-room di un word processor moderno scritta da zero in pure Rust. Supporta impaginazione avanzata, stili tipografici, tabelle ed esportazione documenti con avvio istantaneo.",
+                authorNote: "Architettura 100% pure Rust per garantire sicurezza della memoria e prestazioni elevate anche su documenti lunghi.",
+                screenshot: "",
+                accent: "from-sky-600 via-blue-700 to-indigo-800",
+                uiType: "doc"
+            },
+            {
+                id: 3,
+                repo: "SheetCalc.it",
+                title: "SheetCalc.it",
+                category: "Office & Produttività",
+                language: "Rust",
+                license: "Apache 2.0",
+                shortDesc: "Foglio di calcolo moderno stile Microsoft Excel sviluppato da zero in pure Rust.",
+                fullDesc: "SheetCalc.it offre una griglia di calcolo ad altissime prestazioni scritta in pure Rust. Gestisce formule complesse, funzioni finanziarie e statistiche, formattazione condizionale e dataset di grandi dimensioni con fluidità nativa.",
+                authorNote: "Motore di ricalcolo ottimizzato in Rust per ridurre al minimo la latenza durante la modifica delle celle.",
+                screenshot: "",
+                accent: "from-emerald-600 via-teal-600 to-green-700",
+                uiType: "sheet"
+            },
+            {
+                id: 4,
+                repo: "Flickdeck",
+                title: "Flickdeck",
+                category: "Office & Produttività",
+                language: "Rust",
+                license: "Apache 2.0",
+                shortDesc: "Software per presentazioni e slideshow, reimplementazione open-source di PowerPoint in pure Rust.",
+                fullDesc: "Flickdeck consente di progettare slide professionali, gestire layout vettoriali, transizioni fluide e modalità relatore in un applicativo desktop leggero scritto interamente in pure Rust.",
+                authorNote: "Ideale per creare e proiettare presentazioni senza dover dipendere da suite pesanti o browser.",
+                screenshot: "",
+                accent: "from-orange-500 via-amber-600 to-red-600",
+                uiType: "slides"
+            },
+            {
+                id: 5,
+                repo: "PdfTool",
+                title: "PdfTool",
+                category: "Office & Produttività",
+                language: "Rust",
+                license: "MIT",
+                shortDesc: "Utility veloce e leggera in Rust per unire, dividere, estrarre e gestire file PDF in locale.",
+                fullDesc: "PdfTool elabora i tuoi documenti PDF direttamente sul tuo computer senza caricare file sensibili su server esterni. Permette di unire fascicoli, estrarre singole pagine, riordinare fogli e comprimere documenti in pochi millisecondi.",
+                authorNote: "Rilasciato sotto licenza MIT; elaborazione 100% offline con zero dipendenze esterne.",
+                screenshot: "",
+                accent: "from-rose-600 via-red-600 to-orange-600",
+                uiType: "doc"
+            },
+
+            // -------------------- 2. FOTO & GRAFICA --------------------
+            {
+                id: 6,
+                repo: "DarkRaw-LD",
+                title: "DarkRaw-LD",
+                category: "Foto & Grafica",
+                language: "Rust",
+                license: "Apache 2.0",
+                shortDesc: "Sviluppo ed editing fotografico RAW avanzato ad alte prestazioni in pure Rust (edizione LD).",
+                fullDesc: "DarkRaw-LD è un ambiente professionale per lo sviluppo di negativi digitali RAW. Sfrutta il multi-threading nativo di Rust per offrire regolazioni cromatiche precise, curve tonali, riduzione del rumore ed esportazione ad alta fedeltà.",
+                authorNote: "Edizione personalizzata LD con pipeline di elaborazione ad alta velocità e interfaccia scura calibrata per il fotoritocco.",
+                screenshot: "",
+                accent: "from-slate-700 via-zinc-800 to-indigo-900",
+                uiType: "photo"
+            },
+            {
+                id: 7,
+                repo: "LightRaw-LD",
+                title: "LightRaw-LD",
+                category: "Foto & Grafica",
+                language: "Rust",
+                license: "Apache 2.0",
+                shortDesc: "Editor fotografico non distruttivo in pure Rust ottimizzato per flussi di lavoro rapidi (edizione LD).",
+                fullDesc: "LightRaw-LD combina un flusso di lavoro non distruttivo con un'interfaccia snella e immediata. Ogni modifica a esposizione, bilanciamento del bianco e contrasto viene calcolata in tempo reale senza alterare il file originale.",
+                authorNote: "Ottimizzato per l'editing rapido di intere sessioni fotografiche con anteprima istantanea.",
+                screenshot: "",
+                accent: "from-amber-500 via-orange-600 to-yellow-600",
+                uiType: "photo"
+            },
+            {
+                id: 8,
+                repo: "DarkRaw",
+                title: "DarkRaw",
+                category: "Foto & Grafica",
+                language: "Rust",
+                license: "Apache 2.0",
+                shortDesc: "Editor fotografico open-source scritto da zero in pure Rust per il fotoritocco nativo.",
+                fullDesc: "DarkRaw nasce per offrire un motore di fotoritocco moderno, modulare e scritto interamente in Rust, garantendo controllo granulare su luci, ombre, istogrammi e profili colore.",
+                authorNote: "Base open-source per il fotoritocco nativo ad alte prestazioni su desktop.",
+                screenshot: "",
+                accent: "from-purple-700 via-indigo-800 to-slate-900",
+                uiType: "photo"
+            },
+            {
+                id: 9,
+                repo: "LightRaw.it",
+                title: "LightRaw.it",
+                category: "Foto & Grafica",
+                language: "Rust",
+                license: "Apache 2.0",
+                shortDesc: "Sviluppo RAW e post-produzione fotografica non distruttiva in pure Rust.",
+                fullDesc: "LightRaw.it permette ai fotografi di importare, sviluppare ed esportare scatti RAW con una pipeline non distruttiva basata su Rust, mantenendo la massima qualità dell'immagine in ogni passaggio.",
+                authorNote: "Sviluppato da zero in pure Rust per eliminare i rallentamenti tipici dei cataloghi fotografici tradizionali.",
+                screenshot: "",
+                accent: "from-cyan-600 via-sky-600 to-blue-700",
+                uiType: "photo"
+            },
+            {
+                id: 10,
+                repo: "PhotoDesk.it",
+                title: "PhotoDesk.it",
+                category: "Foto & Grafica",
+                language: "Rust",
+                license: "Apache 2.0",
+                shortDesc: "Visualizzatore, catalogatore e gestore di librerie fotografiche desktop in Rust.",
+                fullDesc: "PhotoDesk.it è progettato per sfogliare, organizzare, taggare e confrontare migliaia di fotografie ad alta risoluzione con caricamento istantaneo delle miniature e lettura completa dei metadati EXIF.",
+                authorNote: "Perfetto come compagno quotidiano per organizzare l'archivio fotografico prima del fotoritocco.",
+                screenshot: "",
+                accent: "from-fuchsia-600 via-pink-600 to-rose-600",
+                uiType: "photo"
+            },
+
+            // -------------------- 3. MEDIA & AI --------------------
+            {
+                id: 11,
+                repo: "MultiIA",
+                title: "MultiIA",
+                category: "Media & AI",
+                language: "Rust",
+                license: "Open Source",
+                shortDesc: "Hub e interfaccia unificata per interagire e confrontare diversi modelli di Intelligenza Artificiale.",
+                fullDesc: "MultiIA centralizza l'accesso a diversi assistenti e modelli linguistici (LLM) in un'unica applicazione desktop nativa. Consente di confrontare le risposte affiancate, organizzare i prompt e gestire la cronologia in locale.",
+                authorNote: "Creato per avere un client AI veloce e unificato direttamente sul desktop senza dover tenere decine di schede browser aperte.",
+                screenshot: "",
+                accent: "from-violet-600 via-indigo-600 to-purple-700",
+                uiType: "ai"
+            },
+            {
+                id: 12,
+                repo: "MediaDesk",
+                title: "MediaDesk",
+                category: "Media & AI",
+                language: "Rust",
+                license: "Apache 2.0",
+                shortDesc: "Gestore multimediale desktop veloce per organizzare e riprodurre file audio e video.",
+                fullDesc: "MediaDesk offre un'esperienza fluida e leggera per catalogare, ispezionare e riprodurre collezioni audio e video locali, con consumo minimo di risorse di sistema.",
+                authorNote: "Interfaccia pulita scritta in Rust pensata per la massima reattività anche su librerie multimediali estese.",
+                screenshot: "",
+                accent: "from-pink-600 via-rose-600 to-red-600",
+                uiType: "media"
+            },
+            {
+                id: 13,
+                repo: "vocalist",
+                title: "vocalist",
+                category: "Media & AI",
+                language: "Rust",
+                license: "Open Source",
+                shortDesc: "Applicazione desktop in Rust per sintesi vocale, elaborazione audio e gestione della voce.",
+                fullDesc: "vocalist semplifica la generazione e l'elaborazione di tracce vocali su desktop, integrando strumenti per la lettura di testi, il controllo dei parametri audio e l'esportazione rapida.",
+                authorNote: "Sviluppata in Rust per garantire bassa latenza nella gestione dei flussi audio.",
+                screenshot: "",
+                accent: "from-teal-500 via-emerald-600 to-cyan-700",
+                uiType: "media"
+            },
+
+            // -------------------- 4. SISTEMA & UTILITY --------------------
+            {
+                id: 14,
+                repo: "FrameDesk",
+                title: "FrameDesk",
+                category: "Sistema & Utility",
+                language: "Rust",
+                license: "Open Source",
+                shortDesc: "Ambiente desktop e gestore finestre/workspace leggero sviluppato in Rust.",
+                fullDesc: "FrameDesk aiuta a organizzare le finestre e gli spazi di lavoro sul monitor con layout rapidi, scorciatoie personalizzabili e un'impronta di memoria estremamente ridotta.",
+                authorNote: "Ideale per chi lavora con più applicazioni affiancate su schermi widescreen o multi-monitor.",
+                screenshot: "",
+                accent: "from-indigo-600 via-blue-700 to-slate-800",
+                uiType: "system"
+            },
+            {
+                id: 15,
+                repo: "TweakDesk",
+                title: "TweakDesk",
+                category: "Sistema & Utility",
+                language: "Rust",
+                license: "Open Source",
+                shortDesc: "Strumento di ottimizzazione, pulizia e personalizzazione avanzata per il sistema operativo.",
+                fullDesc: "TweakDesk raccoglie in un pannello chiaro e sicuro le principali impostazioni di sistema, opzioni di prestazioni e personalizzazioni dell'interfaccia, evitando modifiche manuali complesse.",
+                authorNote: "Ogni opzione è documentata e reversibile con un clic.",
+                screenshot: "",
+                accent: "from-amber-600 via-orange-600 to-slate-800",
+                uiType: "system"
+            },
+            {
+                id: 16,
+                repo: "InstallDesk",
+                title: "InstallDesk",
+                category: "Sistema & Utility",
+                language: "Rust",
+                license: "Open Source",
+                shortDesc: "Gestore e automatizzatore per l'installazione rapida di pacchetti e applicazioni desktop.",
+                fullDesc: "InstallDesk permette di selezionare, installare e aggiornare in blocco i programmi essenziali su una postazione nuova o formattata, risparmiando ore di configurazione manuale.",
+                authorNote: "Pensato per automatizzare il setup completo di una postazione di lavoro in pochi minuti.",
+                screenshot: "",
+                accent: "from-emerald-600 via-green-600 to-teal-700",
+                uiType: "system"
+            },
+            {
+                id: 17,
+                repo: "LiberDesk",
+                title: "LiberDesk",
+                category: "Sistema & Utility",
+                language: "Rust",
+                license: "Open Source",
+                shortDesc: "Utility per liberare spazio su disco, analizzare cartelle e rimuovere file superflui.",
+                fullDesc: "LiberDesk scansiona rapidamente unità e cartelle sfruttando il parallelismo di Rust per individuare file temporanei, cache obsolete e cartelle ingombranti, aiutandoti a recuperare gigabyte preziosi.",
+                authorNote: "Scansione multi-thread ultra-veloce con anteprima chiara prima di qualsiasi eliminazione.",
+                screenshot: "",
+                accent: "from-cyan-600 via-teal-600 to-emerald-700",
+                uiType: "system"
+            },
+            {
+                id: 18,
+                repo: "Renamer",
+                title: "Renamer",
+                category: "Sistema & Utility",
+                language: "Rust",
+                license: "Apache 2.0",
+                shortDesc: "Rinomina massiva ultra-veloce di file e cartelle con regole personalizzate ed espressioni regolari.",
+                fullDesc: "Renamer consente di rinominare migliaia di file contemporaneamente combinando regole di sostituzione, numerazione progressiva, date, trasformazioni maiuscole/minuscole ed espressioni regolari (Regex) con anteprima in tempo reale.",
+                authorNote: "Elabora migliaia di file in una frazione di secondo mostrando sempre l'anteprima del risultato.",
+                screenshot: "",
+                accent: "from-violet-600 via-purple-600 to-indigo-700",
+                uiType: "system"
+            },
+            {
+                id: 19,
+                repo: "DoveClient.it",
+                title: "DoveClient.it",
+                category: "Sistema & Utility",
+                language: "Rust",
+                license: "Open Source",
+                shortDesc: "Client desktop leggero e nativo scritto in Rust per servizi di rete e consultazione rapida.",
+                fullDesc: "DoveClient.it offre un'interfaccia desktop snella, veloce e priva di fronzoli scritta in Rust per interrogare servizi online e consultare informazioni in modo immediato.",
+                authorNote: "Compilato in un singolo eseguibile nativo ad avvio istantaneo.",
+                screenshot: "",
+                accent: "from-blue-600 via-sky-600 to-cyan-600",
+                uiType: "system"
+            }
+        ];
+
+        // ==================== STATO & COMMENTI INIZIALI ====================
+        let currentCategory = "Tutte";
+        let currentSearchQuery = "";
+        let activeAppId = null;
+
+        const DEFAULT_COMMENTS = {
+            1: [
+                { author: "Davide M.", rating: 5, text: "Ottima visione d'insieme per la suite DocPlane, leggerezza impressionante rispetto alle suite tradizionali.", date: "15/11/2026" }
+            ],
+            2: [
+                { author: "Chiara V.", rating: 5, text: "WordBook.it si apre in un istante! Fantastico vederlo scritto interamente in Rust.", date: "14/11/2026" }
+            ],
+            6: [
+                { author: "Alessandro T.", rating: 5, text: "DarkRaw-LD gestisce i file RAW con una fluidità sorprendente.", date: "16/11/2026" }
+            ]
+        };
+
+        // ==================== INIZIALIZZAZIONE ====================
+        document.addEventListener("DOMContentLoaded", () => {
+            initTheme();
+            renderCategoryFilters();
+            renderAppsGrid();
+            setupEventListeners();
+            document.getElementById("current-year").textContent = new Date().getFullYear();
+        });
+
+        // ==================== TEMA CHIARO / SCURO (DEFAULT: DARK) ====================
+        function initTheme() {
+            const savedTheme = localStorage.getItem("ld_apphub_theme");
+            if (savedTheme === "light") {
+                document.documentElement.classList.remove("dark");
+            } else {
+                // Default: tema dark slate elegante
+                document.documentElement.classList.add("dark");
+            }
+            updateThemeIcons();
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle("dark");
+            localStorage.setItem("ld_apphub_theme", isDark ? "dark" : "light");
+            updateThemeIcons();
+        }
+
+        function updateThemeIcons() {
+            const isDark = document.documentElement.classList.contains("dark");
+            const sunIcon = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>`;
+            const moonIcon = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>`;
+            
+            document.querySelectorAll(".theme-icon").forEach(el => {
+                el.innerHTML = isDark ? sunIcon : moonIcon;
+            });
+        }
+
+        // ==================== FILTRI PER CATEGORIA ====================
+        function renderCategoryFilters() {
+            const container = document.getElementById("category-filters");
+            const categories = ["Tutte", "Office & Produttività", "Foto & Grafica", "Media & AI", "Sistema & Utility"];
+
+            container.innerHTML = categories.map(cat => {
+                const count = cat === "Tutte" 
+                    ? APPS_DATA.length 
+                    : APPS_DATA.filter(a => a.category === cat).length;
+
+                const isActive = cat === currentCategory;
+                const activeClasses = isActive
+                    ? "bg-orange-600 text-white shadow-sm shadow-orange-500/25"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700";
+
+                return `
+                    <button 
+                        type="button" 
+                        data-category="${cat}" 
+                        class="category-btn inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap ${activeClasses}"
+                    >
+                        <span>${cat}</span>
+                        <span class="text-[11px] px-1.5 py-0.2 rounded-md ${isActive ? 'bg-white/20 text-white' : 'bg-slate-200/80 dark:bg-slate-700 text-slate-500 dark:text-slate-400'}">${count}</span>
+                    </button>
+                `;
+            }).join("");
+
+            container.querySelectorAll(".category-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    currentCategory = btn.getAttribute("data-category");
+                    renderCategoryFilters();
+                    renderAppsGrid();
+                });
+            });
+        }
+
+        // ==================== HELPERS URL & BADGE ====================
+        function getRepoUrl(app) {
+            return `https://github.com/${GITHUB_USER}/${app.repo}`;
+        }
+
+        function getReleasesUrl(app) {
+            return `https://github.com/${GITHUB_USER}/${app.repo}/releases`;
+        }
+
+        function getBadgesMarkup(app) {
+            const licenseColor = app.license === "MIT"
+                ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30"
+                : app.license === "Apache 2.0"
+                    ? "bg-sky-500/15 text-sky-700 dark:text-sky-300 border-sky-500/30"
+                    : "bg-slate-500/15 text-slate-700 dark:text-slate-300 border-slate-500/30";
+
+            return `
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-bold rounded-md bg-orange-500/15 text-orange-700 dark:text-orange-300 border border-orange-500/30">
+                    <span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                    ${app.language}
+                </span>
+                <span class="px-2 py-0.5 text-[11px] font-semibold rounded-md border ${licenseColor}">
+                    ${app.license}
+                </span>
+            `;
+        }
+
+        // ==================== ANTEPRIMA SCREENSHOT O MOCKUP SVG DINAMICO ====================
+        function getPreviewMarkup(app, isModal = false) {
+            const heightClass = isModal ? "h-full" : "h-48";
+            
+            if (app.screenshot && app.screenshot.trim() !== "") {
+                return `
+                    <img 
+                        src="${app.screenshot}" 
+                        alt="Screenshot di ${app.title}" 
+                        class="w-full ${heightClass} object-cover transition-transform duration-300 ${isModal ? '' : 'group-hover:scale-105'}"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
+                    ${getSvgWindowMockup(app, isModal, true)}
+                `;
+            }
+
+            return getSvgWindowMockup(app, isModal, false);
+        }
+
+        function getSvgWindowMockup(app, isModal, hiddenInitially) {
+            const displayStyle = hiddenInitially ? "display: none;" : "display: flex;";
+            const gradient = app.accent || "from-orange-600 via-amber-600 to-slate-800";
+
+            // Wireframe interno personalizzato in base alla tipologia di app
+            let wireframeContent = "";
+            if (app.uiType === "sheet") {
+                wireframeContent = `
+                    <div class="grid grid-cols-4 gap-1.5 mt-2">
+                        <div class="h-2 rounded bg-white/55"></div><div class="h-2 rounded bg-white/30"></div><div class="h-2 rounded bg-white/30"></div><div class="h-2 rounded bg-white/30"></div>
+                        <div class="h-2 rounded bg-white/25"></div><div class="h-2 rounded bg-emerald-300/70"></div><div class="h-2 rounded bg-white/25"></div><div class="h-2 rounded bg-white/25"></div>
+                        <div class="h-2 rounded bg-white/25"></div><div class="h-2 rounded bg-white/25"></div><div class="h-2 rounded bg-white/45"></div><div class="h-2 rounded bg-white/25"></div>
+                    </div>`;
+            } else if (app.uiType === "photo") {
+                wireframeContent = `
+                    <div class="flex gap-2 mt-2 items-center">
+                        <div class="flex-1 h-11 rounded-lg bg-white/20 border border-white/20 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        </div>
+                        <div class="w-14 space-y-1.5">
+                            <div class="h-1.5 rounded bg-white/60"></div>
+                            <div class="h-1.5 rounded bg-white/40"></div>
+                            <div class="h-1.5 rounded bg-orange-300/80"></div>
+                        </div>
+                    </div>`;
+            } else if (app.uiType === "ai") {
+                wireframeContent = `
+                    <div class="space-y-1.5 mt-2">
+                        <div class="h-2.5 w-2/3 rounded-lg bg-white/30 ml-auto"></div>
+                        <div class="h-4 w-5/6 rounded-lg bg-white/55"></div>
+                        <div class="h-2 w-1/2 rounded-lg bg-white/35"></div>
+                    </div>`;
+            } else if (app.uiType === "slides") {
+                wireframeContent = `
+                    <div class="flex gap-2 mt-2">
+                        <div class="w-10 space-y-1.5">
+                            <div class="h-3 rounded bg-white/50"></div>
+                            <div class="h-3 rounded bg-white/25"></div>
+                        </div>
+                        <div class="flex-1 h-10 rounded bg-white/25 border border-white/20 p-1.5">
+                            <div class="h-2 w-2/3 rounded bg-white/70 mb-1"></div>
+                            <div class="h-1.5 w-1/2 rounded bg-white/40"></div>
+                        </div>
+                    </div>`;
+            } else {
+                wireframeContent = `
+                    <div class="space-y-1.5 mt-2">
+                        <div class="h-2.5 w-3/4 rounded bg-white/70"></div>
+                        <div class="h-2 w-full rounded bg-white/40"></div>
+                        <div class="h-2 w-5/6 rounded bg-white/35"></div>
+                    </div>`;
+            }
+
+            return `
+                <div style="${displayStyle}" class="w-full h-full bg-gradient-to-br ${gradient} p-5 flex-col items-center justify-center text-white relative overflow-hidden select-none">
+                    <!-- Pattern griglia SVG -->
+                    <svg class="absolute inset-0 w-full h-full opacity-15" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="grid-${app.id}-${isModal ? 'm' : 'c'}" width="22" height="22" patternUnits="userSpaceOnUse">
+                                <path d="M 22 0 L 0 0 0 22" fill="none" stroke="white" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#grid-${app.id}-${isModal ? 'm' : 'c'})"/>
+                    </svg>
+                    
+                    <!-- Finestra Desktop Wireframe -->
+                    <div class="relative z-10 w-full max-w-[250px] ${isModal ? 'sm:max-w-[360px]' : ''} rounded-xl bg-slate-950/35 backdrop-blur-md border border-white/25 p-3.5 shadow-2xl">
+                        <div class="flex items-center gap-1.5 pb-2 border-b border-white/15">
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-300"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                            <span class="ml-2 text-[11px] font-bold tracking-tight truncate text-white/95">${app.title}</span>
+                            <span class="ml-auto text-[10px] font-mono text-white/70">${app.language}</span>
+                        </div>
+                        ${wireframeContent}
+                    </div>
+                </div>
+            `;
+        }
+
+        // ==================== RENDERING GRIGLIA APP ====================
+        function renderAppsGrid() {
+            const grid = document.getElementById("apps-grid");
+            const emptyState = document.getElementById("empty-state");
+            const counter = document.getElementById("apps-counter");
+
+            const filteredApps = APPS_DATA.filter(app => {
+                const matchesCategory = currentCategory === "Tutte" || app.category === currentCategory;
+                const query = currentSearchQuery.toLowerCase().trim();
+                const matchesSearch = !query || 
+                    app.title.toLowerCase().includes(query) || 
+                    app.shortDesc.toLowerCase().includes(query) ||
+                    app.category.toLowerCase().includes(query) ||
+                    app.license.toLowerCase().includes(query) ||
+                    app.language.toLowerCase().includes(query);
+                return matchesCategory && matchesSearch;
+            });
+
+            counter.textContent = `${filteredApps.length} ${filteredApps.length === 1 ? 'applicazione trovata' : 'applicazioni open-source'}`;
+
+            if (filteredApps.length === 0) {
+                grid.innerHTML = "";
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            emptyState.classList.add("hidden");
+
+            grid.innerHTML = filteredApps.map(app => {
+                const commentsCount = getCommentsForApp(app.id).length;
+                const repoUrl = getRepoUrl(app);
+                const releasesUrl = getReleasesUrl(app);
+
+                return `
+                    <article class="group rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-black/50 hover:border-orange-500/40 dark:hover:border-orange-500/40 hover:-translate-y-1 transition-all duration-200 flex flex-col overflow-hidden">
+                        
+                        <!-- Anteprima Cliccabile -->
+                        <div 
+                            onclick="openAppModal(${app.id})" 
+                            class="relative h-48 w-full overflow-hidden cursor-pointer bg-slate-100 dark:bg-slate-800"
+                            title="Apri anteprima ingrandita e commenti di ${app.title}"
+                        >
+                            ${getPreviewMarkup(app, false)}
+                            
+                            <!-- Categoria in alto a sinistra -->
+                            <div class="absolute top-3 left-3">
+                                <span class="px-2.5 py-1 text-[11px] font-semibold rounded-lg bg-slate-950/75 text-white backdrop-blur-md">
+                                    ${app.category}
+                                </span>
+                            </div>
+
+                            <!-- Overlay hover -->
+                            <div class="absolute inset-0 bg-slate-950/45 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="px-3.5 py-1.5 rounded-full bg-white text-slate-900 text-xs font-bold shadow-lg flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                    Anteprima & Commenti
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Corpo Card -->
+                        <div class="p-5 flex-1 flex flex-col">
+                            <!-- Titolo e Badge Tecnici -->
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h2 onclick="openAppModal(${app.id})" class="text-lg font-extrabold tracking-tight hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer transition">
+                                    ${app.title}
+                                </h2>
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    ${getBadgesMarkup(app)}
+                                </div>
+                            </div>
+
+                            <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-3 mb-4 flex-1 leading-relaxed">
+                                ${app.shortDesc}
+                            </p>
+
+                            <!-- Callout Note dell'Autore -->
+                            <div class="mb-4 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/75 border border-slate-100 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300">
+                                <span class="font-bold text-orange-600 dark:text-orange-400">Note dell'autore:</span> 
+                                <span class="line-clamp-2 italic">"${app.authorNote}"</span>
+                            </div>
+
+                            <!-- Pulsanti Azione -->
+                            <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+                                <button 
+                                    type="button" 
+                                    onclick="openAppModal(${app.id})" 
+                                    class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+                                >
+                                    <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                                    </svg>
+                                    <span>Commenti (${commentsCount})</span>
+                                </button>
+
+                                <div class="flex items-center gap-1.5">
+                                    <a 
+                                        href="${repoUrl}" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        title="Vedi codice sorgente su GitHub"
+                                        class="p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+                                    >
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                                    </a>
+
+                                    <a 
+                                        href="${releasesUrl}" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-orange-600 hover:bg-orange-700 shadow-sm shadow-orange-500/20 transition"
+                                    >
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                        </svg>
+                                        <span>Scarica</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join("");
+        }
+
+        // ==================== MODALE DETTAGLI ====================
+        function openAppModal(appId) {
+            const app = APPS_DATA.find(item => item.id === appId);
+            if (!app) return;
+
+            activeAppId = appId;
+
+            document.getElementById("modal-preview-container").innerHTML = getPreviewMarkup(app, true);
+            document.getElementById("modal-badges").innerHTML = `
+                <span class="px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    ${app.category}
+                </span>
+                ${getBadgesMarkup(app)}
+            `;
+            document.getElementById("modal-title").textContent = app.title;
+            document.getElementById("modal-description").textContent = app.fullDesc;
+            document.getElementById("modal-author-note").textContent = `"${app.authorNote}"`;
+
+            document.getElementById("modal-repo-link").href = getRepoUrl(app);
+            document.getElementById("modal-download-link").href = getReleasesUrl(app);
+
+            renderCommentsList(appId);
+
+            const modal = document.getElementById("app-modal");
+            modal.classList.remove("hidden");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeAppModal() {
+            const modal = document.getElementById("app-modal");
+            modal.classList.add("hidden");
+            document.body.style.overflow = "";
+            activeAppId = null;
+        }
+
+        // ==================== GESTIONE COMMENTI (LOCALSTORAGE) ====================
+        function getCommentsForApp(appId) {
+            try {
+                const stored = JSON.parse(localStorage.getItem("ld_apphub_comments") || "{}");
+                const defaults = DEFAULT_COMMENTS[appId] || [];
+                const userComments = stored[appId] || [];
+                return [...userComments, ...defaults];
+            } catch (e) {
+                return DEFAULT_COMMENTS[appId] || [];
+            }
+        }
+
+        function saveCommentForApp(appId, commentObj) {
+            try {
+                const stored = JSON.parse(localStorage.getItem("ld_apphub_comments") || "{}");
+                if (!stored[appId]) stored[appId] = [];
+                stored[appId].unshift(commentObj);
+                localStorage.setItem("ld_apphub_comments", JSON.stringify(stored));
+            } catch (e) {
+                console.error("Errore salvataggio commento:", e);
+            }
+        }
+
+        function renderCommentsList(appId) {
+            const comments = getCommentsForApp(appId);
+            const listContainer = document.getElementById("comments-list");
+            const countBadge = document.getElementById("comments-count");
+
+            countBadge.textContent = comments.length;
+
+            if (comments.length === 0) {
+                listContainer.innerHTML = `
+                    <p class="text-xs sm:text-sm text-slate-400 italic py-3 text-center">
+                        Nessun commento ancora presente per ${APPS_DATA.find(a => a.id === appId)?.title}. Lascia il primo feedback!
+                    </p>
+                `;
+                return;
+            }
+
+            listContainer.innerHTML = comments.map(c => {
+                const stars = "★".repeat(c.rating) + "☆".repeat(5 - c.rating);
+                return `
+                    <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/50">
+                        <div class="flex items-center justify-between gap-2 mb-1">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-xs sm:text-sm">${escapeHTML(c.author)}</span>
+                                <span class="text-amber-500 text-xs tracking-tighter">${stars}</span>
+                            </div>
+                            <span class="text-[11px] text-slate-400">${escapeHTML(c.date)}</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            ${escapeHTML(c.text)}
+                        </p>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function escapeHTML(str) {
+            const div = document.createElement("div");
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ==================== EVENT LISTENERS ====================
+        function setupEventListeners() {
+            document.getElementById("search-input").addEventListener("input", (e) => {
+                currentSearchQuery = e.target.value;
+                renderAppsGrid();
+            });
+
+            document.getElementById("reset-filters-btn").addEventListener("click", () => {
+                currentCategory = "Tutte";
+                currentSearchQuery = "";
+                document.getElementById("search-input").value = "";
+                renderCategoryFilters();
+                renderAppsGrid();
+            });
+
+            document.getElementById("theme-toggle-desktop").addEventListener("click", toggleTheme);
+            document.getElementById("theme-toggle-mobile").addEventListener("click", toggleTheme);
+
+            document.getElementById("close-modal-btn").addEventListener("click", closeAppModal);
+            document.getElementById("modal-backdrop").addEventListener("click", closeAppModal);
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && activeAppId !== null) {
+                    closeAppModal();
+                }
+            });
+
+            document.getElementById("comment-form").addEventListener("submit", (e) => {
+                e.preventDefault();
+                if (!activeAppId) return;
+
+                const authorInput = document.getElementById("comment-author");
+                const ratingInput = document.getElementById("comment-rating");
+                const textInput = document.getElementById("comment-text");
+
+                const newComment = {
+                    author: authorInput.value.trim() || "Visitatore",
+                    rating: parseInt(ratingInput.value, 10) || 5,
+                    text: textInput.value.trim(),
+                    date: new Date().toLocaleDateString("it-IT")
+                };
+
+                if (!newComment.text) return;
+
+                saveCommentForApp(activeAppId, newComment);
+                renderCommentsList(activeAppId);
+                renderAppsGrid();
+
+                textInput.value = "";
+                const feedbackMsg = document.getElementById("comment-feedback-msg");
+                feedbackMsg.classList.remove("hidden");
+                setTimeout(() => feedbackMsg.classList.add("hidden"), 3000);
+            });
+
+            const accordionToggle = document.getElementById("accordion-toggle");
+            const accordionContent = document.getElementById("accordion-content");
+            const accordionArrow = document.getElementById("accordion-arrow");
+
+            function openAndScrollToGuide() {
+                accordionContent.classList.remove("hidden");
+                accordionArrow.classList.add("rotate-180");
+                document.getElementById("publish-guide-section").scrollIntoView({ behavior: "smooth" });
+            }
+
+            accordionToggle.addEventListener("click", () => {
+                const isHidden = accordionContent.classList.toggle("hidden");
+                accordionArrow.classList.toggle("rotate-180", !isHidden);
+            });
+
+            document.getElementById("guide-btn-desktop").addEventListener("click", openAndScrollToGuide);
+            document.getElementById("guide-btn-mobile").addEventListener("click", openAndScrollToGuide);
+        }
+    </script>
+</body>
+</html>
